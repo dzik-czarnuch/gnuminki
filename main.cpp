@@ -1,6 +1,9 @@
 #include <ncurses.h>
 
 #include "bar.h"
+#include "status.h"
+#include "changeling.h"
+#include "game.h"
 
 /*
  * GNUminki - gra sapero-podobna na GPLv3
@@ -9,23 +12,32 @@
  * Politechnika Poznańska, 2017
  */
 
+/* TODO: Most important, fix status.cpp so it returns a vector
+ * that you can put into changeling.h
+ */
+
 int main() {
     int ch, maxY, maxX;
+    int statusMaxY, changelingMaxX;
     initscr();
     raw();
     noecho();
-    keypad(stdscr, TRUE);
+    keypad(stdscr, true);
 
     start_color();
-    init_pair(1, COLOR_CYAN, COLOR_BLACK);
+    init_pair(1, COLOR_GREEN, COLOR_BLACK);
     init_pair(2, COLOR_WHITE, COLOR_BLUE);
+    init_pair(3, COLOR_WHITE, COLOR_CYAN);
     wbkgd(stdscr, COLOR_PAIR(1));
 
     getmaxyx(stdscr, maxY, maxX);
-    printw("Stdscr:\nY:%d\nX:%d", maxY, maxX);
     refresh();
 
     bar(maxY);
+    statusMaxY = status(maxY / 5, (int) (maxX / 4.8));
+    changelingMaxX = changeling(maxY - statusMaxY - 1, (int) (maxX / 4.8), statusMaxY);
+    // stdscr - status height - bar height
+    game(maxY, changelingMaxX);
 
     ch = getch();
     switch (ch) {

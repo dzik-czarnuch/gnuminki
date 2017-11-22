@@ -3,7 +3,6 @@
 //
 
 #include "bar.h"
-#include <ncurses.h>
 
 void bar(int maxY) {
     int height = 1;
