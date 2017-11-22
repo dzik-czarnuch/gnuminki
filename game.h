@@ -7,6 +7,6 @@
 
 #include <ncurses.h>
 
-void game(int, int);
+WINDOW *game(int, int);
 
 #endif //GNUMINKI_GAME_H

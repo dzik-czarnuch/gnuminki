@@ -7,6 +7,6 @@
 
 #include <ncurses.h>
 
-int changeling(int, int, int);
+WINDOW *changeling(int, int, int);
 
 #endif //GNUMINKI_CHANGELING_H

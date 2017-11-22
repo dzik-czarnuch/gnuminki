@@ -7,7 +7,7 @@
 
 #include <ncurses.h>
 
-int status(int, int);
+WINDOW *status(int, int);
 
 
 #endif //GNUMINKI_STATUS_H

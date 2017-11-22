@@ -16,9 +16,10 @@
 /* TODO: Make every window WINDOW type and refresh all windows after closing popup
  */
 
+
 int main() {
     int ch, maxY, maxX;
-    int statusMaxY, changelingMaxX;
+    WINDOW *barWindow, *statusWindow, *changelingWindow, *gameWindow;
     WINDOW *helpWindow;
     initscr();
     raw();
@@ -26,50 +27,54 @@ int main() {
     keypad(stdscr, true);
 
     start_color();
-    init_pair(1, COLOR_GREEN, COLOR_BLACK);
-    init_pair(2, COLOR_WHITE, COLOR_BLUE);
-    init_pair(3, COLOR_WHITE, COLOR_MAGENTA);
+    init_pair(1, COLOR_GREEN, COLOR_BLACK);     //windows default
+    init_pair(2, COLOR_WHITE, COLOR_BLUE);      //popup & bar default
+    init_pair(3, COLOR_WHITE, COLOR_MAGENTA);   //debug default
     wbkgd(stdscr, COLOR_PAIR(1));
 
     getmaxyx(stdscr, maxY, maxX);
     refresh();
 
-    bar(maxY);
-    statusMaxY = status(maxY / 5, (int) (maxX / 4.8));
-    changelingMaxX = changeling(maxY - statusMaxY - 1, (int) (maxX / 4.8), statusMaxY);
-    // stdscr - status height - bar height
-    game(maxY, changelingMaxX);
-    ch = getch();
-    switch (ch) {
-        case KEY_F(1): {
-            helpWindow = help(maxY, maxX);
-            delwin(helpWindow);
-            doupdate();
-            break;
-        }
-        case KEY_F(2): {
-            waddstr(stdscr, "F2 pressed");
-            break;
-        }
-        case KEY_F(3): {
-            waddstr(stdscr, "F3 pressed");
-            break;
-        }
-        case KEY_F(7): {
-            waddstr(stdscr, "F7 pressed");
-            break;
-        }
-        case KEY_F(12): {
-            waddstr(stdscr, "F12 pressed");
-            break;
-        }
-        default:
-            refresh();
-            break;
-    }
-    refresh();
-    getch();
+    barWindow = bar(maxY);
+    statusWindow = status(maxY / 5,
+                          (int) (maxX / 4.8));
+    changelingWindow = changeling(maxY - getmaxy(statusWindow) - getmaxy(barWindow),
+                                  (int) (maxX / 4.8),
+                                  getmaxy(statusWindow));
+    gameWindow = game(maxY, getmaxx(changelingWindow));
 
+        ch = getch();
+        switch (ch) {
+            case KEY_F(1): {
+                //TODO learn panel library
+                helpWindow = help(maxY, maxX);
+                getch();
+                delwin(helpWindow);
+                wrefresh(helpWindow);
+                break;
+            }
+            case KEY_F(2): {
+                waddstr(stdscr, "F2 pressed");
+                break;
+            }
+            case KEY_F(3): {
+                waddstr(stdscr, "F3 pressed");
+                break;
+            }
+            case KEY_F(7): {
+                waddstr(stdscr, "F7 pressed");
+                break;
+            }
+            case KEY_F(12): {
+                waddstr(stdscr, "F12 pressed");
+                break;
+            }
+            default:
+                refresh();
+                break;
+        }
+        refresh();
+    getch();
     endwin();
     return 0;
 }

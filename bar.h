@@ -7,6 +7,6 @@
 
 #include <ncurses.h>
 
-void bar(int);
+WINDOW *bar(int);
 
 #endif //GNUMINKI_BAR_H
