@@ -10,5 +10,4 @@ void game(int maxY, int changelingMaxX) {
     box(gameWindow, 0, 0);
     wbkgd(gameWindow, COLOR_PAIR(1));
     wrefresh(gameWindow);
-    delwin(gameWindow);
 }

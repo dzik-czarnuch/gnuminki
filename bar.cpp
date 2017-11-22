@@ -10,5 +10,4 @@ void bar(int maxY) {
     wbkgd(statusBar, COLOR_PAIR(2));
     waddstr(statusBar, " F1:Help\tF2:New Game\tF3:Highscores\tF7:Debug Mode\tF12:Credits");
     wrefresh(statusBar);
-    delwin(statusBar);
 }

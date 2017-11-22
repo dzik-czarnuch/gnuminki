@@ -4,6 +4,7 @@
 #include "status.h"
 #include "changeling.h"
 #include "game.h"
+#include "help.h"
 
 /*
  * GNUminki - gra sapero-podobna na GPLv3
@@ -12,13 +13,13 @@
  * Politechnika Poznańska, 2017
  */
 
-/* TODO: Most important, fix status.cpp so it returns a vector
- * that you can put into changeling.h
+/* TODO: Make every window WINDOW type and refresh all windows after closing popup
  */
 
 int main() {
     int ch, maxY, maxX;
     int statusMaxY, changelingMaxX;
+    WINDOW *helpWindow;
     initscr();
     raw();
     noecho();
@@ -27,7 +28,7 @@ int main() {
     start_color();
     init_pair(1, COLOR_GREEN, COLOR_BLACK);
     init_pair(2, COLOR_WHITE, COLOR_BLUE);
-    init_pair(3, COLOR_WHITE, COLOR_CYAN);
+    init_pair(3, COLOR_WHITE, COLOR_MAGENTA);
     wbkgd(stdscr, COLOR_PAIR(1));
 
     getmaxyx(stdscr, maxY, maxX);
@@ -38,11 +39,12 @@ int main() {
     changelingMaxX = changeling(maxY - statusMaxY - 1, (int) (maxX / 4.8), statusMaxY);
     // stdscr - status height - bar height
     game(maxY, changelingMaxX);
-
     ch = getch();
     switch (ch) {
         case KEY_F(1): {
-            waddstr(stdscr, "F1 pressed");
+            helpWindow = help(maxY, maxX);
+            delwin(helpWindow);
+            doupdate();
             break;
         }
         case KEY_F(2): {
@@ -61,11 +63,13 @@ int main() {
             waddstr(stdscr, "F12 pressed");
             break;
         }
-        default: // do nothing;
+        default:
+            refresh();
             break;
     }
     refresh();
     getch();
+
     endwin();
     return 0;
 }
