@@ -46,6 +46,7 @@ int main() {
         ch = getch();
         switch (ch) {
             case KEY_F(1): {
+                //TODO F1 juz uzywane przez terminal
                 //TODO learn panel library
                 helpWindow = help(maxY, maxX);
                 getch();
