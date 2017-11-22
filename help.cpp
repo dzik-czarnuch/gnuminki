@@ -22,5 +22,6 @@ WINDOW *help(int maxY, int maxX) {
     mvwprintw(helpWindow, ++i, 1, " 1-7\t: number of mines adjacent to this square", 0, 0, maxY, maxX);
 
     wrefresh(helpWindow);
+    getch();
     return helpWindow;
 }

@@ -21,17 +21,16 @@ int main() {
     int ch, maxY, maxX;
     WINDOW *barWindow, *statusWindow, *changelingWindow, *gameWindow;
     WINDOW *helpWindow;
+
     initscr();
     raw();
     noecho();
     keypad(stdscr, true);
-
     start_color();
     init_pair(1, COLOR_GREEN, COLOR_BLACK);     //windows default
     init_pair(2, COLOR_WHITE, COLOR_BLUE);      //popup & bar default
     init_pair(3, COLOR_WHITE, COLOR_MAGENTA);   //debug default
     wbkgd(stdscr, COLOR_PAIR(1));
-
     getmaxyx(stdscr, maxY, maxX);
     refresh();
 
@@ -45,15 +44,6 @@ int main() {
 
         ch = getch();
         switch (ch) {
-            case KEY_F(1): {
-                //TODO F1 juz uzywane przez terminal
-                //TODO learn panel library
-                helpWindow = help(maxY, maxX);
-                getch();
-                delwin(helpWindow);
-                wrefresh(helpWindow);
-                break;
-            }
             case KEY_F(2): {
                 waddstr(stdscr, "F2 pressed");
                 break;
@@ -62,20 +52,20 @@ int main() {
                 waddstr(stdscr, "F3 pressed");
                 break;
             }
-            case KEY_F(7): {
-                waddstr(stdscr, "F7 pressed");
+            case KEY_F(4): {
+                //TODO learn panel library
+                //TODO fork() z stdlib.h; time.h
+                helpWindow = help(maxY, maxX);
                 break;
             }
             case KEY_F(12): {
                 waddstr(stdscr, "F12 pressed");
                 break;
             }
-            default:
-                refresh();
+            default: //do nothing
                 break;
         }
         refresh();
-    getch();
     endwin();
     return 0;
 }
