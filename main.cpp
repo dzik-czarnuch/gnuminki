@@ -5,6 +5,8 @@
 #include "changeling.h"
 #include "game.h"
 #include "help.h"
+#include "menu.h"
+#include "cmake-build-debug/CMakeFiles/Battlefield.h"
 
 /*
  * GNUminki - gra sapero-podobna na GPLv3
@@ -16,11 +18,13 @@
 /* TODO: Make every window WINDOW type and refresh all windows after closing popup
  */
 
-
 int main() {
     int ch, maxY, maxX;
+
     WINDOW *barWindow, *statusWindow, *changelingWindow, *gameWindow;
-    WINDOW *helpWindow;
+    WINDOW *helpWindow, *menuWindow;
+
+
 
     initscr();
     raw();
@@ -34,13 +38,19 @@ int main() {
     getmaxyx(stdscr, maxY, maxX);
     refresh();
 
+//  TODO: Skalowanie okna menu
+
+    menuWindow = menu();
+
+
     barWindow = bar(maxY);
-    statusWindow = status(maxY / 5,
-                          (int) (maxX / 4.8));
-    changelingWindow = changeling(maxY - getmaxy(statusWindow) - getmaxy(barWindow),
-                                  (int) (maxX / 4.8),
-                                  getmaxy(statusWindow));
+    statusWindow = status(maxY / 5, (int) (maxX / 4.8));
+    changelingWindow = changeling(maxY - getmaxy(statusWindow) - getmaxy(barWindow), (int) (maxX / 4.8), getmaxy(statusWindow));
     gameWindow = game(maxY, getmaxx(changelingWindow));
+
+
+
+    //////////////////////////////////////////////// Bar buttons
 
         ch = getch();
         switch (ch) {
