@@ -6,7 +6,7 @@
 #include "game.h"
 #include "help.h"
 #include "menu.h"
-#include "cmake-build-debug/CMakeFiles/Battlefield.h"
+#include "square.h"
 
 /*
  * GNUminki - gra sapero-podobna na GPLv3
@@ -41,8 +41,14 @@ int main() {
 //  TODO: Skalowanie okna menu
 
     menuWindow = menu();
+    ////////////////////////////// GAME
+
+    square *tab[xsize][ysize];
 
 
+
+
+    /////////////////////////////
     barWindow = bar(maxY);
     statusWindow = status(maxY / 5, (int) (maxX / 4.8));
     changelingWindow = changeling(maxY - getmaxy(statusWindow) - getmaxy(barWindow), (int) (maxX / 4.8), getmaxy(statusWindow));
