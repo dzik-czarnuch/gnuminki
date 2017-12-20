@@ -10,12 +10,10 @@
 
 
 class board : protected  square{
-protected:
-    int xsize, ysize; //szerokosc i wysokosc pola
 
 public:
-    board(int, int); //przekazanie szerokosci i wysokosci
-    void create_board(square); //tworzenie tablicy elementow square
+    board();
+    bool create_board(int, int, square); //tworzenie tablicy elementow square
     ~board();
 };
 

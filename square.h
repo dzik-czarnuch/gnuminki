@@ -6,13 +6,13 @@
 #define GNUMINKI_SQUARE_H
 
 
-virtual class square {
+class square {
 protected:
     int value; //wartosc 0-9, 0 - puste pole, 9 - mina
     bool show; //czy pole jest odkryte
 public:
-    square()={}
-    ~square()={}
+    square();
+    ~square();
 };
 
 

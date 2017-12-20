@@ -6,10 +6,12 @@
 #define GNUMINKI_AREAOFEFFECT_H
 
 
-class areaOfEffect {
+#include "square.h"
+
+class areaOfEffect : protected square{
 public:
     areaOfEffect();
-    void show_area(int, int); //odslanianie obszarow pustych
+    void show_area(int, int, square); //odslanianie obszarow pustych
     ~areaOfEffect();
 };
 

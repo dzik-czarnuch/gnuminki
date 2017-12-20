@@ -8,7 +8,7 @@ win::win() {
 
 }
 
-bool win::if_win() {
+bool win::if_win(int xsize, int ysize, square tab) {
 
     int mine = 0;
 

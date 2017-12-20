@@ -6,11 +6,12 @@
 #define GNUMINKI_WIN_H
 
 #include <ncurses.h>
+#include "square.h"
 
-class win {
+class win : protected square{
 public:
     win();
-    bool if_win(); //sprawdzanie pola czy wygrana
+    bool if_win(int, int, square); //sprawdzanie pola czy wygranax
     ~win();
 };
 
