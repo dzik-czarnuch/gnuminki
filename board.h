@@ -9,11 +9,11 @@
 #include "square.h"
 
 
-class board : protected  square{
+class board : public square{
 
 public:
     board();
-    bool create_board(int, int, square); //tworzenie tablicy elementow square
+    bool create_board(int xsize, int ysize, square tab[300][100]); //tworzenie tablicy elementow square
     ~board();
 };
 

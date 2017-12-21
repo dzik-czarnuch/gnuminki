@@ -9,7 +9,8 @@ board::board() {
 
 }
 
-bool board::create_board(int xsize, int ysize, square tab) {
+bool board::create_board(int xsize, int ysize, square tab[300][100]) {
+
 
     for(int i = 0; i<xsize; i++ ){
         for(int j=0; j<ysize; j++){

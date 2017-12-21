@@ -11,14 +11,11 @@
 
 
 class plant : public square{
-private:
-    time_t t;
-    int pos_x, pos_y; //
-    int mine_number; //liczba min
 public:
-    plant(int, int); //losowanie pozycji a nastepnie jej wartosci 0-9
-    bool set_mine(int, int); //rozstawianie min na polu
-    int mine_plant(square); //losowanie ominowanych pol
+    time_t t;
+    plant(); //losowanie pozycji a nastepnie jej wartosci 0-9
+    bool set_mine(int, int, square tab[300][100]); //rozstawianie min na polu
+    int mine_plant(int, int, square tab[300][100]); //losowanie ominowanych pol
     ~plant();
 
 };

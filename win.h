@@ -8,10 +8,10 @@
 #include <ncurses.h>
 #include "square.h"
 
-class win : protected square{
+class win : public square{
 public:
     win();
-    bool if_win(int, int, square); //sprawdzanie pola czy wygranax
+    bool if_win(int, int, square tab[300][100]); //sprawdzanie pola czy wygranax
     ~win();
 };
 
