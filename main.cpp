@@ -5,8 +5,14 @@
 #include "changeling.h"
 #include "game.h"
 #include "help.h"
-#include "menu.h"
+
+///////////////////////// moje pliki do zalaczenia
 #include "square.h"
+#include "areaOfEffect.h"
+#include "board.h"
+#include "plant.h"
+#include "win.h"
+
 
 /*
  * GNUminki - gra sapero-podobna na GPLv3
@@ -19,69 +25,28 @@
  */
 
 int main() {
-    int ch, maxY, maxX;
 
-    WINDOW *barWindow, *statusWindow, *changelingWindow, *gameWindow;
-    WINDOW *helpWindow, *menuWindow;
+    int xsize = 124;
+    int ysize = 55;
 
+    square tab[xsize][ysize]; // musze dostac wielkosc tablicy od ciebie
 
+    board *tablica;
+   // square * wsk1 =  &tablica; //tworzenie planszy
+    tablica -> create_board(xsize, ysize, tab[300][100]); //wywołanie funkcji od tego
 
-    initscr();
-    raw();
-    noecho();
-    keypad(stdscr, true);
-    start_color();
-    init_pair(1, COLOR_GREEN, COLOR_BLACK);     //windows default
-    init_pair(2, COLOR_WHITE, COLOR_BLUE);      //popup & bar default
-    init_pair(3, COLOR_WHITE, COLOR_MAGENTA);   //debug default
-    wbkgd(stdscr, COLOR_PAIR(1));
-    getmaxyx(stdscr, maxY, maxX);
-    refresh();
+    plant *ustaw;
+    //square * wsk2 =  &ustaw;
+    ustaw -> mine_plant(xsize, ysize, tab[300][100]);
 
-//  TODO: Skalowanie okna menu
+    win *wygrana;
+    //square * wsk3 =  &wygrana;
+    wygrana -> if_win(xsize, ysize, tab[300][100]); //do sprawdzania wygranej
 
-    menuWindow = menu();
-    ////////////////////////////// GAME
-
-    square *tab[xsize][ysize];
+    areaOfEffect *pokaz;
+    //square * wsk4 = &pokaz //wskaznik to wywołania funkcji w sterowaniu
+    pokaz->show_area(xsize, ysize, tab[300][100]);
 
 
-
-
-    /////////////////////////////
-    barWindow = bar(maxY);
-    statusWindow = status(maxY / 5, (int) (maxX / 4.8));
-    changelingWindow = changeling(maxY - getmaxy(statusWindow) - getmaxy(barWindow), (int) (maxX / 4.8), getmaxy(statusWindow));
-    gameWindow = game(maxY, getmaxx(changelingWindow));
-
-
-
-    //////////////////////////////////////////////// Bar buttons
-
-        ch = getch();
-        switch (ch) {
-            case KEY_F(2): {
-                waddstr(stdscr, "F2 pressed");
-                break;
-            }
-            case KEY_F(3): {
-                waddstr(stdscr, "F3 pressed");
-                break;
-            }
-            case KEY_F(4): {
-                //TODO learn panel library
-                //TODO fork() z stdlib.h; time.h
-                helpWindow = help(maxY, maxX);
-                break;
-            }
-            case KEY_F(12): {
-                waddstr(stdscr, "F12 pressed");
-                break;
-            }
-            default: //do nothing
-                break;
-        }
-        refresh();
-    endwin();
     return 0;
 }

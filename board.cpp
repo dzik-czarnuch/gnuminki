@@ -4,27 +4,23 @@
 
 #include "board.h"
 
-board::board(int x, int y) {
+board::board() {
 
-    xsize = x;
-    ysize = y;
 
 }
 
-void board::create_board(square tab) {
+bool board::create_board(int xsize, int ysize, square tab[300][100]) {
 
-    for(int i = 0; i<xsize; i++){
+
+    for(int i = 0; i<xsize; i++ ){
         for(int j=0; j<ysize; j++){
 
            tab[i][j].value = 0;
            tab[i][j].show = false;
         }
-
-        return true;
     }
-
+    return true;
 }
-
 
 board::~board() {
 

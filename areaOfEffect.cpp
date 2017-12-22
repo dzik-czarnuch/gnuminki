@@ -8,26 +8,26 @@ areaOfEffect::areaOfEffect() {
 
 }
 
-void areaOfEffect::show_area(int x, int y) {
+void areaOfEffect::show_area(int xsize, int ysize, square tab[300][100]) {
 
-    if (x < 0 || x > 9) return;
-    if (y < 0 || y > 9) return;
-    if (tab[x][y].show == true) return;
+    if (xsize < 0 || xsize > 9) return;
+    if (ysize < 0 || ysize > 9) return;
+    if (tab[xsize][ysize].show == true) return;
 
-    if (tab[x][y].wartosc != 9 && tab[x][y].show == false)
-        tab[x][y].show = true;
+    if (tab[xsize][ysize].value != 9 && tab[xsize][ysize].show == false)
+        tab[xsize][ysize].show = true;
 
-    if (tab[x][y].value != 0) return;
+    if (tab[xsize][ysize].value != 0) return;
 
-    show_area(x - 1, y - 1);
-    show_area(x - 1, y);
-    show_area(x - 1, y + 1);
-    show_area(x + 1, y - 1);
-    show_area(x + 1, y);
-    show_area(x + 1, y + 1);
-    show_area(x, y - 1);
-    show_area(x, y);
-    show_area(x, y + 1);
+    show_area(xsize -1, ysize-1, tab);
+    show_area(xsize-1, ysize, tab);
+    show_area(xsize-1, ysize+1, tab);
+    show_area(xsize+1, ysize-1, tab);
+    show_area(xsize+1, ysize, tab);
+    show_area(xsize+1, ysize + 1, tab);
+    show_area(xsize, ysize-1, tab);
+    show_area(xsize, ysize, tab);
+    show_area(xsize, ysize+1, tab);
 
 }
 

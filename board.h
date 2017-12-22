@@ -9,13 +9,11 @@
 #include "square.h"
 
 
-class board : protected  square{
-protected:
-    int xsize, ysize; //szerokosc i wysokosc pola
+class board : public square{
 
 public:
-    board(int, int); //przekazanie szerokosci i wysokosci
-    void create_board(square); //tworzenie tablicy elementow square
+    board();
+    bool create_board(int xsize, int ysize, square tab[300][100]); //tworzenie tablicy elementow square
     ~board();
 };
 
